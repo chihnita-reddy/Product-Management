@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <header>
+        <div class="title-container">
+            <a href="cart.html" class="cart-icon"><img src="media/cart.png" alt="Cart"></a>
+            <span class="cart-count">0</span>
+            <h1>Product Management</h1>
+        </div>
+          </header>
+    <section class="product">
+        <div class="product-card">
+            <img src="media/curryleaves.jpg" alt="Product 1" style="width: 150px;">
+            <h2>Curry Leaves</h2>
+            <div class="product-details">
+                <p class="cost">Cost: $52.04</p>
+               
+            </div>
+            <p class="description">
+                Carefully sun-dried and finely ground, our curry leaves powder adds a fragrant depth to your dishes, transporting you to the heart of Indian cuisine with every sprinkle.
+            </p>
+            <button class="add-to-cart-btn" data-product="Curry Leaves">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="media/coriander.webp" alt="Product 1" style="width: 150px;">
+            <h2>Coriander</h2>
+            <div class="product-details">
+                <p class="cost">Cost: $53.06</p>
+               
+            </div>
+            <p class="description">
+                Sourced from the finest coriander seeds and ground to perfection, our aromatic powder adds a burst of flavor that enlivens your dishes. 
+             </p>
+             <button class="add-to-cart-btn" data-product="Coriander">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="media/moringa.jpeg" alt="Product 1" style="width: 150px;">
+            <h2>Moringa</h2>
+            <div class="product-details">
+                <p class="cost">Cost: $51.03</p>
+            
+            </div>
+            <p class="description">
+                Moringo Leaves Powder – a natural powerhouse of nutrients crafted to invigorate your body and nourish your soul. 
+            </p>
+            <button class="add-to-cart-btn" data-product="moringa">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="media/mint.webp" alt="Product 1" style="width: 150px;">
+            <h2>Mint</h2>
+            <div class="product-details">
+                <p class="cost">Cost: $50.05</p>
+                <!-- ... (previous code) ... -->
+
+            </div>
+            <p class="description">
+                Handpicked and finely ground, our mint powder is a burst of cool and invigorating flavor, perfect for adding a delightful twist to your culinary creations or soothing beverages. 
+            </p>
+            <button class="add-to-cart-btn" data-product="mint">Add to Cart</button>
+        </div>
+    </section>
+
+<section class="about-us">
+        <h2>About Us</h2>
+        <p>
+            Welcome to Product Management, your ultimate destination for premium leafy vegetable powders that redefine the art of culinary innovation. At Product Management, we are passionate about harnessing the natural goodness of leafy vegetables and transforming them into convenient, versatile powders that elevate your cooking experience.
+  </section>
+    <footer>
+        <p>&copy; 2023 Product Management </p>
+    </footer>
+<script>
+    const minusButton = document.querySelector(".minus");
+    const plusButton = document.querySelector(".plus");
+    const quantityValue = document.querySelector(".quantity-value");
+    let currentQuantity = 1;
+    minusButton.addEventListener("click", () => {
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityValue.textContent = currentQuantity;
+        }
+    });
+    plusButton.addEventListener("click", () => {
+        currentQuantity++;
+        quantityValue.textContent = currentQuantity;
+    });   
+</script>
+<script>
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const productName = button.getAttribute("data-product");
+            addToCart(productName);
+        });
+    });
+    function addToCart(productName) {
+        const existingItem = cartItems.find(item => item.name === productName);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cartItems.push({ name: productName, quantity: 1 });
+        }
+
+        updateCartUI();
+    }
+    function updateCartUI() {
+        cartCount.textContent = cartItems.length;
+    
+        cartItemsContainer.innerHTML = "";
+        cartItems.forEach(item => {
+            const cartItem = document.createElement("div");
+            cartItem.classList.add("cart-item");
+            cartItem.innerHTML = `
+                <p>${item.name} - Quantity: ${item.quantity}</p>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+    }
+</script>
+<script src="product.js"></script>
+</body>
+</html>
